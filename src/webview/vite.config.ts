@@ -5,13 +5,16 @@ export default defineConfig({
     assetsDir: "",
     minify: false,
     rollupOptions: {
-      input: "src/webview/outline/index.tsx",
+      input: "src/webview/src/index.tsx",
       output: {
-        dir: "dist/webview/outline",
+        dir: "dist/webview",
         format: "iife",
         entryFileNames: "index.js",
         manualChunks: undefined,
       },
     },
   },
+  test: {
+    include: ["src/webview/tests/**"],
+  }
 });

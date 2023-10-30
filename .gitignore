@@ -1,5 +1,6 @@
 *vsix
-
 dist/
-
 node_modules/
+test-resources/
+mocha.config.js
+tests-out/

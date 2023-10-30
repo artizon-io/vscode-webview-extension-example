@@ -1,53 +1,55 @@
 {
-  "name": "artizon-vscode-outline",
-  "displayName": "VSCode Outline",
-  "description": "A vscode extension that provides a feature-rich outline view",
+  "name": "extension-id",
+  "displayName": "vscode webview extension example",
+  "description": "vscode webview extension example",
   "icon": "public/icon.png",
-  "publisher": "artizon",
-  "version": "0.1.0",
+  "publisher": "<publisher>",
+  "version": "0.0.0",
   "scripts": {
     "package": "vsce package",
     "publish": "vsce publish",
-    "build": "tsc -p .",
+    "build:backend": "tsc -p .",
     "build:webview": "vite build --config ./src/webview/vite.config.ts && npm run build:webview-tailwind",
-    "build:webview-tailwind": "tailwindcss -i ./src/webview/outline/tailwind.css -o ./dist/webview/outline/tailwind.css -c ./src/webview/tailwind.config.ts",
-    "build:all": "npm run build && npm run build:webview",
-    "test": "vitest --config ./src/webview/vite.config.ts"
+    "build:webview-tailwind": "tailwindcss -i ./src/webview/src/tailwind.css -o ./dist/webview/tailwind.css -c ./src/webview/tailwind.config.ts",
+    "build": "npm run build:backend && npm run build:webview",
+    "test:webview": "vitest --config ./src/webview/vite.config.ts",
+    "test:e2e:setup-only": "extest get-vscode -s ./test-resources && extest get-chromedriver -s ./test-resources",
+    "test:e2e": "tsc -p ./tsconfig.mocha.json && extest setup-and-run -s ./test-resources -m ./.mocharc.js tests-out/*",
+    "test": "npm run test:webview && npm run test:e2e"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/artizon-io/vscode-outline.git"
+    "url": "<git-url>"
   },
   "main": "./dist/main.js",
   "dependencies": {
     "@artizon/store": "^0.2.3",
-    "uuid": "^9.0.0",
-    "zod": "^3.21.4"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.9",
+    "@types/mocha": "^10.0.3",
     "@types/node": "^20.3.3",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
-    "@types/uuid": "^9.0.2",
+    "@types/uuid": "^9.0.6",
     "@types/vscode": "^1.79.1",
     "@types/vscode-webview": "^1.57.1",
     "@vscode/vsce": "^2.19.0",
     "@vscode/webview-ui-toolkit": "^1.2.2",
-    "immer": "^10.0.2",
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.10.1",
-    "react-intersection-observer": "^9.5.2",
     "tailwind-merge": "^1.13.2",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.1.6",
     "vite": "^4.4.2",
-    "vitest": "^0.34.3"
+    "vitest": "^0.34.3",
+    "vscode-extension-tester": "^5.10.0"
   },
   "keywords": [
-    "outline",
-    "symbols",
-    "artizon"
+    "<keyword>"
   ],
   "engines": {
     "vscode": "^1.79.1"
@@ -60,59 +62,38 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "artizon-vscode-outline",
-          "title": "VSCode Outline",
-          "icon": "public/outline-activitybar-icon.svg"
+          "id": "view-container-id",
+          "title": "views container name",
+          "icon": "public/activitybar-icon.svg"
         }
       ]
     },
     "views": {
-      "artizon-vscode-outline": [
+      "view-container-id": [
         {
           "type": "webview",
-          "id": "artizon-vscode-outline-view",
-          "name": "VSCode Outline"
+          "id": "view-id",
+          "name": "view name"
         }
       ]
     },
     "menus": {
       "view/title": [
         {
-          "command": "artizon-vscode-outline.toggle-filter-widget",
-          "when": "view == artizon-vscode-outline-view",
-          "group": "navigation"
-        },
-        {
-          "command": "artizon-vscode-outline.reload",
-          "when": "view == artizon-vscode-outline-view",
+          "command": "extension-id.command-id",
+          "when": "view == view-id",
           "group": "navigation"
         }
       ]
     },
     "commands": [
       {
-        "command": "artizon-vscode-outline.toggle-filter-widget",
-        "title": "VSCode Outline: Toggle filter widget",
+        "command": "extension-id.command-id",
+        "title": "Example command",
         "icon": {
-          "light": "public/filter-icon-dark.svg",
-          "dark": "public/filter-icon-light.svg"
+          "light": "public/command-icon-light.svg",
+          "dark": "public/command-icon-dark.svg"
         }
-      },
-      {
-        "command": "artizon-vscode-outline.reload",
-        "title": "VSCode Outline: Reload",
-        "icon": {
-          "light": "public/reload-icon-dark.svg",
-          "dark": "public/reload-icon-light.svg"
-        }
-      },
-      {
-        "command": "artizon-vscode-outline.show-filter-widget",
-        "title": "VSCode Outline: Show filter widget"
-      },
-      {
-        "command": "artizon-vscode-outline.hide-filter-widget",
-        "title": "VSCode Outline: Hide filter widget"
       }
     ],
     "configuration": {

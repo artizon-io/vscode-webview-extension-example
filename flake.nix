@@ -1,5 +1,5 @@
 {
-  description = "An impure flake for developing VSCode Outline";
+  description = "An impure flake for developing on this vscode extension";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-23.05";
