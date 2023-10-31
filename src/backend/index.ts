@@ -137,25 +137,24 @@ export class WebviewProvider implements vscode.WebviewViewProvider {
   };
 }
 
-function reloadOnConfigChange(): Disposable {
-  const disposables: Disposable[] = [];
+function reloadOnConfigChange(context: vscode.ExtensionContext): Disposable {
+  let disposables: Disposable[] = [];
 
   return workspace.onDidChangeConfiguration((e) => {
     if (e.affectsConfiguration(EXTENSION_NAME)) {
       disposables.forEach((disposable) => disposable.dispose());
 
-      disposables.push(
-        ...[
-          vscode.commands.registerCommand(
-            `${EXTENSION_NAME}.example-command1`,
-            () => {}
-          ),
-          vscode.commands.registerCommand(
-            `${EXTENSION_NAME}.example-command2`,
-            () => {}
-          ),
-        ]
-      );
+      disposables = [
+        vscode.commands.registerCommand(
+          `${EXTENSION_NAME}.example-command1`,
+          () => {}
+        ),
+        vscode.commands.registerCommand(
+          `${EXTENSION_NAME}.example-command2`,
+          () => {}
+        ),
+      ];
+      context.subscriptions.push(...disposables);
     }
   });
 }
@@ -163,7 +162,7 @@ function reloadOnConfigChange(): Disposable {
 export const onActivate = (context: vscode.ExtensionContext) => {
   context.subscriptions.push(
     ...[
-      reloadOnConfigChange(),
+      reloadOnConfigChange(context),
 
       // Events to handle
       // I prefer first propagate the change into the store and subscribe the changes to the store
