@@ -1,10 +1,8 @@
 .vscode/
-node_modules/
 src/
 test-resources/
 tests*/
 .gitignore
 .mocharc.js
 flake*
-package*.json
 tsconfig*

@@ -5,7 +5,7 @@ An example of an extension that uses:
 - Vitest for unit testing the webview
 - [redhat-developer/vscode-extension-tester](https://github.com/redhat-developer/vscode-extension-tester/) for E2E testing of the whole extension
 
-This project started off as an extension that aims to provide a feature-rich outline view as a replacement to the default one. Originally, we opted to create the tree view using the [Webview API](https://code.visualstudio.com/api/extension-guides/webview), but later on we have switched to use the [Tree View API](https://code.visualstudio.com/api/extension-guides/tree-view) mainly for its stability. This project now serves as an example of using the Webview API. With that said, it is important to know that [the use of the Webview API is discouraged](https://code.visualstudio.com/api/ux-guidelines/webviews). Please consult the [UX-guidelines](https://code.visualstudio.com/api/ux-guidelines/overview) for more information.
+This project started off as an extension that aims to provide a feature-rich outline view as a replacement to the default one. It is important to know that [the use of the Webview API is discouraged](https://code.visualstudio.com/api/ux-guidelines/webviews). Please consult the [UX-guidelines](https://code.visualstudio.com/api/ux-guidelines/overview) for more information.
 
 ## Structure
 
